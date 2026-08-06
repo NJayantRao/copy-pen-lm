@@ -13,6 +13,8 @@ const app = express();
 const port = process.env.PORT ?? 5000;
 const clientUrl = process.env.CLIENT_URL ?? "http://localhost:3000";
 
+app.set("trust proxy", 1);
+
 app.use(
   cors({
     origin: clientUrl,
