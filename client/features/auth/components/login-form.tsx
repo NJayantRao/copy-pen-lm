@@ -11,7 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Field, FieldDescription, FieldGroup } from "@/components/ui/field";
 import { Spinner } from "@/components/ui/spinner";
 import { BrandMark } from "@/shared/components/brand-mark";
 import { signIn } from "../lib/auth-client";
@@ -22,7 +21,7 @@ function GoogleIcon({ className }: { className?: string }) {
     <svg
       viewBox="0 0 24 24"
       aria-hidden="true"
-      className={cn("size-4", className)}
+      className={cn("size-4 shrink-0", className)}
     >
       <path
         d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -60,7 +59,7 @@ export function LoginForm({
 
     const { data, error } = await signIn.social({
       provider: "google",
-      callbackURL: callbackUrl,
+      callbackURL: new URL(callbackUrl, window.location.origin).toString(),
     });
 
     if (error) {
@@ -79,50 +78,50 @@ export function LoginForm({
 
   return (
     <div
-      className={cn("flex w-full max-w-sm flex-col gap-8", className)}
+      className={cn(
+        "flex w-full max-w-md flex-col items-center gap-6",
+        className,
+      )}
       {...props}
     >
-      <BrandMark className="justify-center" />
+      <BrandMark />
 
-      <Card className="border border-border/60 shadow-none ring-0">
+      <Card className="w-full border-border/60 bg-card shadow-none ring-0">
         <CardHeader className="text-center">
           <CardTitle className="font-heading text-xl font-semibold">
             Welcome back
           </CardTitle>
-          <CardDescription>
-            Sign in with Google to continue to Copy Pen LM
+          <CardDescription className="mt-1.5">
+            Sign in with Google to continue to Chaibook
           </CardDescription>
         </CardHeader>
+
         <CardContent>
           <form
             onSubmit={(event) => {
               event.preventDefault();
               void handleGoogleSignIn();
             }}
+            className="flex flex-col gap-5"
           >
-            <FieldGroup>
-              <Field>
-                <Button
-                  type="submit"
-                  variant="outline"
-                  size="lg"
-                  className="w-full font-medium"
-                  disabled={isLoading}
-                >
-                  {isLoading ? <Spinner /> : <GoogleIcon />}
-                  Continue with Google
-                </Button>
-                {error ? (
-                  <p className="text-center text-sm text-destructive">
-                    {error}
-                  </p>
-                ) : null}
-                <FieldDescription className="text-center">
-                  By continuing, you agree to our terms of service and privacy
-                  policy.
-                </FieldDescription>
-              </Field>
-            </FieldGroup>
+            <Button
+              type="submit"
+              variant="outline"
+              className="h-11 w-full justify-center gap-2 rounded-full font-medium"
+              disabled={isLoading}
+            >
+              {isLoading ? <Spinner /> : <GoogleIcon />}
+              Continue with Google
+            </Button>
+
+            {error ? (
+              <p className="text-center text-sm text-destructive">{error}</p>
+            ) : null}
+
+            <p className="text-center text-xs leading-relaxed text-muted-foreground">
+              By continuing, you agree to our terms of service and privacy
+              policy.
+            </p>
           </form>
         </CardContent>
       </Card>
