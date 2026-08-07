@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Chaibook",
+  title: "Copy Pen LM",
   description: "Chat with your books",
 };
 

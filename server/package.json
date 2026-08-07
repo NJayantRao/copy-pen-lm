@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Chaibook API server",
+  "description": "Copy Pen LM API server",
   "main": "dist/index.js",
   "scripts": {
     "dev": "prisma generate && tsx watch src/index.ts",
