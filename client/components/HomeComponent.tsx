@@ -21,6 +21,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 import { BrandMark } from "@/shared/components/brand-mark";
 import { authRoutes } from "@/features/auth/lib/auth-routes";
 
@@ -35,7 +36,7 @@ const FEATURES = [
     icon: LibraryIcon,
     title: "Bring your whole library",
     description:
-      "Drop in PDFs, ebooks, web pages, and transcripts. Copy Pen reads and indexes everything you upload.",
+      "Drop in PDFs, ebooks, web pages, and transcripts. Chaibook reads and indexes everything you upload.",
   },
   {
     icon: MessageSquareIcon,
@@ -65,7 +66,7 @@ const FEATURES = [
     icon: ShieldCheckIcon,
     title: "Grounded, not guessed",
     description:
-      "Copy Pen LM only answers from what you've actually given it — no hallucinated facts posing as your content.",
+      "Chaibook only answers from what you've actually given it — no hallucinated facts posing as your content.",
   },
 ];
 
@@ -76,7 +77,7 @@ const STEPS = [
     icon: FolderInputIcon,
     title: "Bring in your sources",
     description:
-      "Add PDFs, web links, and notes to a notebook. Copy Pen LM parses and indexes them in the background.",
+      "Add PDFs, web links, and notes to a notebook. Chaibook parses and indexes them in the background.",
     points: [
       "Supports PDFs, web pages, and plain text",
       "Sources stay organized per notebook",
@@ -120,7 +121,7 @@ const FAQS = [
   {
     question: "Are answers actually grounded in my sources?",
     answer:
-      "Yes. Copy Pen LM answers from what you've uploaded and cites the passage each answer came from, so you can verify it instead of taking it on faith.",
+      "Yes. Chaibook answers from what you've uploaded and cites the passage each answer came from, so you can verify it instead of taking it on faith.",
   },
   {
     question: "Can I have more than one notebook?",
@@ -128,14 +129,14 @@ const FAQS = [
       "Yes — create as many as you need and keep sources, chats, and generated study material scoped to each one.",
   },
   {
-    question: "Is Copy Pen LM free to use?",
+    question: "Is Chaibook free to use?",
     answer:
       "Yes, you can get started for free by signing in with Google — no separate account or setup required.",
   },
   {
     question: "How do I sign in?",
     answer:
-      "Copy Pen LM uses Google sign-in only, so there's no separate password to create or remember.",
+      "Chaibook uses Google sign-in only, so there's no separate password to create or remember.",
   },
 ];
 
@@ -152,7 +153,7 @@ export function HomeContent() {
       />
 
       {/* Nav */}
-      <header className="relative sticky top-0 z-20 border-b border-transparent">
+      <header className="sticky top-0 z-20 border-b bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 md:px-10">
           <BrandMark />
           <nav className="hidden items-center gap-6 md:flex">
@@ -166,13 +167,16 @@ export function HomeContent() {
               </a>
             ))}
           </nav>
-          <Button
-            variant="ghost"
-            nativeButton={false}
-            render={<Link href={authRoutes.login} />}
-          >
-            Sign in
-          </Button>
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <ModeToggle />
+            <Button
+              variant="ghost"
+              nativeButton={false}
+              render={<Link href={authRoutes.login} />}
+            >
+              Sign in
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -188,9 +192,9 @@ export function HomeContent() {
           </h1>
 
           <p className="mt-6 max-w-xl text-balance text-base leading-relaxed text-muted-foreground md:text-lg">
-            Upload your sources and Copy Pen LM turns them into an assistant
-            that actually knows what's inside — ready to explain, cite, and
-            connect the dots.
+            Upload your sources and Chaibook turns them into an assistant that
+            actually knows what's inside — ready to explain, cite, and connect
+            the dots.
           </p>
 
           <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
@@ -228,7 +232,7 @@ export function HomeContent() {
             {FEATURES.map(({ icon: Icon, title, description }) => (
               <Card
                 key={title}
-                className="border border-border/60 shadow-none ring-0 transition-colors hover:border-primary/30"
+                className="border border-border/60 transition-colors hover:border-primary/30"
               >
                 <CardContent className="flex flex-col gap-3">
                   <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10">
@@ -284,7 +288,7 @@ export function HomeContent() {
                 value={step.value}
                 className="mt-6 w-full"
               >
-                <Card className="border border-border/60 shadow-none ring-0">
+                <Card className="border border-border/60">
                   <CardContent className="flex flex-col gap-5 sm:flex-row sm:items-start">
                     <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10">
                       <step.icon
@@ -402,7 +406,7 @@ export function HomeContent() {
               </Link>
             </nav>
             <p className="text-xs text-muted-foreground">
-              &copy; {new Date().getFullYear()} Copy Pen LM. Built for readers.
+              &copy; {new Date().getFullYear()} Chaibook. Built for readers.
             </p>
           </div>
         </div>

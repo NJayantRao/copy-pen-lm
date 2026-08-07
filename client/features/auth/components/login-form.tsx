@@ -86,7 +86,7 @@ export function LoginForm({
     >
       <BrandMark />
 
-      <Card className="w-full border-border/60 bg-card shadow-none ring-0">
+      <Card className="w-full border-border/60">
         <CardHeader className="text-center">
           <CardTitle className="font-heading text-xl font-semibold">
             Welcome back
